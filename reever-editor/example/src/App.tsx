@@ -1,5 +1,5 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {ReeverEditor} from 'reever-editor';
+import React, { useEffect, useRef, useState } from 'react';
+import { ReeverEditor } from 'reever-editor';
 
 function App() {
     const editorRef = useRef<HTMLDivElement>(null);
@@ -13,6 +13,7 @@ function App() {
         unorderedList: false,
     });
     const [slashMenuVisible, setSlashMenuVisible] = useState(false);
+    const [slashNode, setSlashNode] = useState<Text | null>(null);
     const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
@@ -21,137 +22,72 @@ function App() {
             editorInstance.current.setContent("Editör burada olacak...");
         }
 
-        const toolbarEl = toolbarRef.current as HTMLDivElement;
-
-        const handleSelection = () => {
-            const selection = window.getSelection();
-            const toolbarEl = toolbarRef.current;
-
-            if (!toolbarEl) return;
-
-            if (selection && selection.rangeCount > 0 && !selection.isCollapsed) {
-                if (toolbarEl.style.display === 'flex') return;
-
-                const range = selection.getRangeAt(0);
-                const rect = range.getBoundingClientRect();
-
-                toolbarEl.style.top = `${rect.top - toolbarEl.offsetHeight - 60 + window.scrollY}px`;
-                toolbarEl.style.left = `${rect.left + rect.width / 2 - toolbarEl.offsetWidth / 2}px`;
-                toolbarEl.style.display = 'flex';
-
-                setActiveStates({
-                    bold: !!editorInstance.current?.queryCommandState('bold'),
-                    italic: !!editorInstance.current?.queryCommandState('italic'),
-                    underline: !!editorInstance.current?.queryCommandState('underline'),
-                    heading: editorInstance.current?.queryFormatBlock() || '',
-                    unorderedList: !!editorInstance.current?.queryCommandState('insertUnorderedList'),
-                });
-            } else {
-                toolbarEl.style.display = 'none';
-            }
-        };
-
-        const hideToolbar = () => {
-            if (toolbarEl) {
-                toolbarEl.style.display = 'none';
-            }
-        };
-
-        const handleTabKey = (e: KeyboardEvent) => {
-            if (e.key === 'Tab') {
-                e.preventDefault();
-                if (editorInstance.current?.queryCommandState('insertUnorderedList')) {
-                    document.execCommand('indent');
-                    editorRef.current?.focus();
-                }
-            }
-        };
-
-        const handleSlashKey = (e: KeyboardEvent) => {
+        const handleSlashKey = (e: globalThis.KeyboardEvent) => {
             if (e.key === '/') {
-                setTimeout(() => {
-                    const selection = window.getSelection();
-                    if (selection && selection.rangeCount > 0) {
-                        const range = selection.getRangeAt(0);
-                        const rect = range.getBoundingClientRect();
-                        setMenuPosition({
-                            y: rect.top + rect.height + 10 + window.scrollY, // Slash karakterinin altında çıkmasını sağla
-                            x: rect.left
-                        });
-                        setSlashMenuVisible(true);
-                    }
-                }, 0);
+                e.preventDefault();
+
+                const selection = window.getSelection();
+                if (!selection || selection.rangeCount === 0) return;
+
+                const range = selection.getRangeAt(0).cloneRange();
+                const newSlashNode = document.createTextNode('/');
+                range.insertNode(newSlashNode);
+                range.setStartAfter(newSlashNode);
+                range.collapse(true);
+
+                selection.removeAllRanges();
+                selection.addRange(range);
+
+                setSlashNode(newSlashNode);
+
+                const rect = newSlashNode.parentElement?.getBoundingClientRect();
+                if (rect) {
+                    setMenuPosition({
+                        x: rect.left,
+                        y: rect.bottom + window.scrollY + 10,
+                    });
+                }
+                setSlashMenuVisible(true);
             }
         };
 
-        document.addEventListener('mouseup', handleSelection);
-        document.addEventListener('keyup', handleSelection);
-        document.addEventListener('scroll', hideToolbar);
-        document.addEventListener('keydown', handleTabKey);
         document.addEventListener('keydown', handleSlashKey);
 
         return () => {
-            document.removeEventListener('mouseup', handleSelection);
-            document.removeEventListener('keyup', handleSelection);
-            document.removeEventListener('scroll', hideToolbar);
-            document.removeEventListener('keydown', handleTabKey);
             document.removeEventListener('keydown', handleSlashKey);
-        };
-    }, []);
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            setSlashMenuVisible(false);
-        };
-
-        document.addEventListener('click', handleClickOutside);
-
-        return () => {
-            document.removeEventListener('click', handleClickOutside);
         };
     }, []);
 
     const execAndUpdate = (command: () => void, removeSlash = false) => (e: React.MouseEvent) => {
         e.preventDefault();
-
         const selection = window.getSelection();
-        if (!selection || selection.rangeCount === 0) return;
-
-        const range = selection.getRangeAt(0).cloneRange();
+        if (!selection || !slashNode || !slashNode.parentNode) return;
 
         if (removeSlash) {
-            const { startContainer, startOffset } = range;
+            const parentNode = slashNode.parentNode;
+            const nextSibling = slashNode.nextSibling;
 
-            if (startContainer.nodeType === Node.TEXT_NODE && startContainer.textContent) {
-                const textContent = startContainer.textContent;
+            slashNode.remove();
 
-                if (startOffset > 0 && textContent[startOffset - 1] === '/') {
-                    const beforeSlash = textContent.substring(0, startOffset - 1);
-                    const afterSlash = textContent.substring(startOffset);
-                    startContainer.textContent = beforeSlash + afterSlash;
+            const newRange = document.createRange();
 
-                    // Slash'ı sildikten sonra yeni boş text node ekleyerek imlecin birleşmesini engelle
-                    const spaceNode = document.createTextNode('\u00A0');
-                    range.insertNode(spaceNode);
-
-                    range.setStartAfter(spaceNode);
-                    range.collapse(true);
-                }
+            if (nextSibling) {
+                newRange.setStartBefore(nextSibling);
+            } else {
+                newRange.setStart(parentNode, parentNode.childNodes.length);
             }
 
+            newRange.collapse(true);
             selection.removeAllRanges();
-            selection.addRange(range);
+            selection.addRange(newRange);
+
+            setSlashNode(null);
         }
 
         setSlashMenuVisible(false);
 
         setTimeout(() => {
             editorRef.current?.focus();
-
-            selection.removeAllRanges();
-            selection.addRange(range);
-            selection.collapseToEnd();
-
             command();
 
             setActiveStates({
@@ -165,7 +101,7 @@ function App() {
     };
 
     return (
-        <div style={{padding: 20, position: 'relative', fontFamily: 'Inter, sans-serif'}}>
+        <div style={{ padding: 20, position: 'relative', fontFamily: 'Inter, sans-serif' }}>
             <h1>Reever Editor Test 🚀</h1>
 
             <div
@@ -187,25 +123,25 @@ function App() {
                     if (toolbarRef.current) toolbarRef.current.style.display = 'none';
                     editorInstance.current?.bold();
                 })}
-                        style={{color: activeStates.bold ? 'blue' : 'white'}}>
+                        style={{ color: activeStates.bold ? 'blue' : 'white' }}>
                     <b>B</b>
                 </button>
                 <button onMouseDown={execAndUpdate(() => {
                     if (toolbarRef.current) toolbarRef.current.style.display = 'none';
                     editorInstance.current?.italic();
                 })}
-                        style={{color: activeStates.italic ? 'blue' : 'white'}}>
+                        style={{ color: activeStates.italic ? 'blue' : 'white' }}>
                     <i>I</i>
                 </button>
                 <button onMouseDown={execAndUpdate(() => {
                     if (toolbarRef.current) toolbarRef.current.style.display = 'none';
                     editorInstance.current?.underline();
                 })}
-                        style={{color: activeStates.underline ? 'blue' : 'white'}}>
+                        style={{ color: activeStates.underline ? 'blue' : 'white' }}>
                     <u>U</u>
                 </button>
 
-                <div className="separator" style={{borderLeft: '1px solid #555', height: 20}}/>
+                <div className="separator" style={{ borderLeft: '1px solid #555', height: 20 }} />
 
                 {[1, 2, 3].map(level => (
                     <button key={level}
@@ -213,18 +149,18 @@ function App() {
                                 if (toolbarRef.current) toolbarRef.current.style.display = 'none';
                                 editorInstance.current?.toggleHeading(level);
                             })}
-                            style={{color: activeStates.heading === `h${level}` ? 'blue' : 'white'}}>
+                            style={{ color: activeStates.heading === `h${level}` ? 'blue' : 'white' }}>
                         H{level}
                     </button>
                 ))}
 
-                <div className="separator" style={{borderLeft: '1px solid #555', height: 20}}/>
+                <div className="separator" style={{ borderLeft: '1px solid #555', height: 20 }} />
 
                 <button onMouseDown={execAndUpdate(() => {
                     if (toolbarRef.current) toolbarRef.current.style.display = 'none';
                     editorInstance.current?.unorderedList();
                 })}
-                        style={{color: activeStates.unorderedList ? 'blue' : 'white'}}>
+                        style={{ color: activeStates.unorderedList ? 'blue' : 'white' }}>
                     • Liste
                 </button>
 
@@ -239,7 +175,7 @@ function App() {
             <div
                 ref={editorRef}
                 id="editor"
-                style={{minHeight: 200, border: "1px solid gray", padding: 10, borderRadius: 8}}
+                style={{ minHeight: 200, border: "1px solid gray", padding: 10, borderRadius: 8 }}
                 contentEditable={true}
                 suppressContentEditableWarning={true}
             />
@@ -261,22 +197,55 @@ function App() {
                     gap: "6px",
                     fontFamily: "Inter, sans-serif",
                 }}>
-                    <div style={{ cursor: 'pointer' }} onMouseDown={execAndUpdate(() => editorInstance.current?.bold(), true)}>🔠 Bold</div>
-                    <div style={{ cursor: 'pointer' }} onMouseDown={execAndUpdate(() => editorInstance.current?.italic(), true)}>𝑰 Italic</div>
-                    <div style={{ cursor: 'pointer' }} onMouseDown={execAndUpdate(() => editorInstance.current?.underline(), true)}>🔽 Underline</div>
+                    <div
+                        style={{
+                            cursor: 'pointer',
+                            background: activeStates.bold ? '#ddd' : 'transparent',
+                        }}
+                        onMouseDown={execAndUpdate(() => editorInstance.current?.bold(), true)}
+                    >
+                        🔠 Bold
+                    </div>
 
-                    <hr/>
+                    <div
+                        style={{
+                            cursor: 'pointer',
+                            background: activeStates.italic ? '#ddd' : 'transparent',
+                        }}
+                        onMouseDown={execAndUpdate(() => editorInstance.current?.italic(), true)}
+                    >
+                        𝑰 Italic
+                    </div>
+
+                    <div
+                        style={{
+                            cursor: 'pointer',
+                            background: activeStates.underline ? '#ddd' : 'transparent',
+                        }}
+                        onMouseDown={execAndUpdate(() => editorInstance.current?.underline(), true)}
+                    >
+                        U Underline
+                    </div>
+
+                    <hr />
 
                     {[1, 2, 3].map(level => (
-                        <div key={level} style={{ cursor: 'pointer' }}
-                             onMouseDown={execAndUpdate(() => editorInstance.current?.toggleHeading(level), true)}>
+                        <div
+                            key={level}
+                            style={{
+                                cursor: 'pointer',
+                                background: activeStates.heading === `h${level}` ? '#ddd' : 'transparent',
+                            }}
+                            onMouseDown={execAndUpdate(() => editorInstance.current?.toggleHeading(level), true)}
+                        >
                             📌 Heading {level}
                         </div>
                     ))}
 
-                    <hr/>
+                    <hr />
 
-                    <div style={{ cursor: 'pointer' }} onMouseDown={execAndUpdate(() => editorInstance.current?.unorderedList(), true)}>
+                    <div style={{ cursor: 'pointer' }}
+                         onMouseDown={execAndUpdate(() => editorInstance.current?.unorderedList(), true)}>
                         📋 Liste
                     </div>
                     <div style={{ cursor: 'pointer' }} onMouseDown={execAndUpdate(() => {
