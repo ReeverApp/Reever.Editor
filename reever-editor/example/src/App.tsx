@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ReeverEditor } from 'reever-editor';
+import React, {useEffect, useRef, useState} from 'react';
+import {ReeverEditor} from 'reever-editor';
+import {Bold, Heading1, Heading2, Heading3, Italic, Underline} from "lucide-react";
 
 function App() {
     const editorRef = useRef<HTMLDivElement>(null);
@@ -14,7 +15,22 @@ function App() {
     });
     const [slashMenuVisible, setSlashMenuVisible] = useState(false);
     const [slashNode, setSlashNode] = useState<Text | null>(null);
-    const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
+    const [menuPosition, setMenuPosition] = useState({x: 0, y: 0});
+    const [slashFilter, setSlashFilter] = useState('');
+
+    const slashMenuItems = [
+        { label: 'Bold', action: () => editorInstance.current?.bold() },
+        { label: 'Italic', action: () => editorInstance.current?.italic() },
+        { label: 'Underline', action: () => editorInstance.current?.underline() },
+        { label: 'Heading 1', action: () => editorInstance.current?.toggleHeading(1) },
+        { label: 'Heading 2', action: () => editorInstance.current?.toggleHeading(2) },
+        { label: 'Heading 3', action: () => editorInstance.current?.toggleHeading(3) },
+        { label: 'Liste', action: () => editorInstance.current?.unorderedList() },
+    ];
+
+    const filteredMenuItems = slashMenuItems.filter(item =>
+        item.label.toLowerCase().includes(slashFilter.toLowerCase())
+    );
 
     useEffect(() => {
         if (editorRef.current) {
@@ -23,31 +39,37 @@ function App() {
         }
 
         const handleSlashKey = (e: globalThis.KeyboardEvent) => {
+            const selection = window.getSelection();
+            if (!selection || selection.rangeCount === 0) return;
+
+            const range = selection.getRangeAt(0);
+            const { startOffset, startContainer } = range;
+
             if (e.key === '/') {
-                e.preventDefault();
+                const textContent = startContainer.textContent || '';
+                const textBeforeCursor = textContent.slice(0, startOffset);
 
-                const selection = window.getSelection();
-                if (!selection || selection.rangeCount === 0) return;
+                if (textBeforeCursor === '' || textBeforeCursor.endsWith(' ')) {
+                    e.preventDefault();
 
-                const range = selection.getRangeAt(0).cloneRange();
-                const newSlashNode = document.createTextNode('/');
-                range.insertNode(newSlashNode);
-                range.setStartAfter(newSlashNode);
-                range.collapse(true);
+                    const newSlashNode = document.createTextNode('/');
+                    range.insertNode(newSlashNode);
+                    range.setStartAfter(newSlashNode);
+                    range.collapse(true);
 
-                selection.removeAllRanges();
-                selection.addRange(range);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
 
-                setSlashNode(newSlashNode);
-
-                const rect = newSlashNode.parentElement?.getBoundingClientRect();
-                if (rect) {
-                    setMenuPosition({
-                        x: rect.left,
-                        y: rect.bottom + window.scrollY + 10,
-                    });
+                    setSlashNode(newSlashNode);
+                    const rect = newSlashNode.parentElement!.getBoundingClientRect();
+                    setMenuPosition({ x: rect.left, y: rect.bottom + window.scrollY + 10 });
+                    setSlashMenuVisible(true);
+                    setSlashFilter('');
                 }
-                setSlashMenuVisible(true);
+            } else if (slashMenuVisible && /^[a-zA-Z0-9ğüşöçıİĞÜŞÇÖı\s]$/.test(e.key) && e.key.length === 1) {
+                setSlashFilter((prev) => prev + e.key);
+            } else if (slashMenuVisible && e.key === 'Backspace') {
+                setSlashFilter((prev) => prev.slice(0, -1));
             }
         };
 
@@ -58,12 +80,100 @@ function App() {
         };
     }, []);
 
+    useEffect(() => {
+        const handleEnterKey = (e: globalThis.KeyboardEvent) => {
+            if (e.key === 'Enter') {
+                setTimeout(() => {
+                    const selection = window.getSelection();
+                    if (!selection) return;
+
+                    document.execCommand('insertParagraph');  // Yeni paragraf oluşturur
+                    document.execCommand('outdent');          // Liste varsa dışarı çıkarır
+
+                    if (editorInstance.current?.queryCommandState('bold'))
+                        editorInstance.current.bold();
+
+                    if (editorInstance.current?.queryCommandState('italic'))
+                        editorInstance.current.italic();
+
+                    if (editorInstance.current?.queryCommandState('underline'))
+                        editorInstance.current.underline();
+
+                    editorInstance.current?.toggleHeading(0);
+
+                    setActiveStates({
+                        bold: false,
+                        italic: false,
+                        underline: false,
+                        heading: '',
+                        unorderedList: false,
+                    });
+                }, 0);
+            }
+        };
+
+        document.addEventListener('keydown', handleEnterKey);
+
+        return () => {
+            document.removeEventListener('keydown', handleEnterKey);
+        };
+    }, []);
+
+    useEffect(() => {
+        const handleSelection = () => {
+            const selection = window.getSelection();
+            if (selection && !selection.isCollapsed && toolbarRef.current) {
+                const range = selection.getRangeAt(0);
+                const rect = range.getBoundingClientRect();
+
+                toolbarRef.current.style.top = `${rect.top + window.scrollY - 50}px`;
+                toolbarRef.current.style.left = `${rect.left}px`;
+                toolbarRef.current.style.display = 'flex';
+
+                setActiveStates({
+                    bold: !!editorInstance.current?.queryCommandState('bold'),
+                    italic: !!editorInstance.current?.queryCommandState('italic'),
+                    underline: !!editorInstance.current?.queryCommandState('underline'),
+                    heading: editorInstance.current?.queryFormatBlock() || '',
+                    unorderedList: !!editorInstance.current?.queryCommandState('insertUnorderedList'),
+                });
+            } else if (toolbarRef.current) {
+                toolbarRef.current.style.display = 'none';
+            }
+        };
+
+        document.addEventListener('mouseup', handleSelection);
+        document.addEventListener('keyup', handleSelection);
+
+        return () => {
+            document.removeEventListener('mouseup', handleSelection);
+            document.removeEventListener('keyup', handleSelection);
+        };
+    }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (slashMenuVisible && editorRef.current) {
+                const targetNode = e.target as Node;
+                if (!editorRef.current.contains(targetNode) || (slashNode && !slashNode.parentNode?.contains(targetNode))) {
+                    setSlashMenuVisible(false);
+                    setSlashNode(null);
+                }
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [slashMenuVisible, editorRef, slashNode]);
+
     const execAndUpdate = (command: () => void, removeSlash = false) => (e: React.MouseEvent) => {
         e.preventDefault();
-        const selection = window.getSelection();
-        if (!selection || !slashNode || !slashNode.parentNode) return;
 
-        if (removeSlash) {
+        if (removeSlash && slashNode && slashNode.parentNode) {
+            const selection = window.getSelection();
             const parentNode = slashNode.parentNode;
             const nextSibling = slashNode.nextSibling;
 
@@ -78,8 +188,8 @@ function App() {
             }
 
             newRange.collapse(true);
-            selection.removeAllRanges();
-            selection.addRange(newRange);
+            selection?.removeAllRanges();
+            selection?.addRange(newRange);
 
             setSlashNode(null);
         }
@@ -101,81 +211,124 @@ function App() {
     };
 
     return (
-        <div style={{ padding: 20, position: 'relative', fontFamily: 'Inter, sans-serif' }}>
+        <div style={{padding: 20, position: 'relative', fontFamily: 'Inter, sans-serif'}}>
             <h1>Reever Editor Test 🚀</h1>
 
             <div
                 ref={toolbarRef}
                 id="toolbar"
                 style={{
-                    position: "absolute",
-                    display: "none",
-                    padding: "8px",
-                    background: "#333",
-                    color: "#fff",
-                    borderRadius: "8px",
-                    gap: "4px",
-                    zIndex: 100,
-                    fontFamily: 'Inter, sans-serif',
+                    position: 'absolute',
+                    display: 'none',
+                    gap: '8px',
+                    padding: '6px 10px',
+                    borderRadius: '8px',
+                    background: '#333',
+                    color: '#fff',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 1000,
+                    fontFamily: 'Inter, sans-serif'
                 }}
             >
-                <button onMouseDown={execAndUpdate(() => {
-                    if (toolbarRef.current) toolbarRef.current.style.display = 'none';
-                    editorInstance.current?.bold();
-                })}
-                        style={{ color: activeStates.bold ? 'blue' : 'white' }}>
-                    <b>B</b>
+                <button
+                    onMouseDown={execAndUpdate(() => editorInstance.current?.bold())}
+                    style={{
+                        padding: '4px 8px',
+                        borderRadius: '4px',
+                        background: activeStates.bold ? '#555' : 'transparent',
+                        color: activeStates.bold ? '#fff' : '#ccc',
+                        cursor: 'pointer',
+                        border: 'none',
+                    }}
+                >
+                    Bold
                 </button>
-                <button onMouseDown={execAndUpdate(() => {
-                    if (toolbarRef.current) toolbarRef.current.style.display = 'none';
-                    editorInstance.current?.italic();
-                })}
-                        style={{ color: activeStates.italic ? 'blue' : 'white' }}>
-                    <i>I</i>
+                <button
+                    onMouseDown={execAndUpdate(() => editorInstance.current?.italic())}
+                    style={{
+                        padding: '4px 8px',
+                        borderRadius: '4px',
+                        background: activeStates.italic ? '#555' : 'transparent',
+                        color: activeStates.italic ? '#fff' : '#ccc',
+                        cursor: 'pointer',
+                        border: 'none',
+                    }}
+                >
+                    Italic
                 </button>
-                <button onMouseDown={execAndUpdate(() => {
-                    if (toolbarRef.current) toolbarRef.current.style.display = 'none';
-                    editorInstance.current?.underline();
-                })}
-                        style={{ color: activeStates.underline ? 'blue' : 'white' }}>
-                    <u>U</u>
+                <button
+                    onMouseDown={execAndUpdate(() => editorInstance.current?.underline())}
+                    style={{
+                        padding: '4px 8px',
+                        borderRadius: '4px',
+                        background: activeStates.underline ? '#555' : 'transparent',
+                        color: activeStates.underline ? '#fff' : '#ccc',
+                        cursor: 'pointer',
+                        border: 'none',
+                    }}
+                >
+                    Underline
                 </button>
-
-                <div className="separator" style={{ borderLeft: '1px solid #555', height: 20 }} />
-
-                {[1, 2, 3].map(level => (
-                    <button key={level}
-                            onMouseDown={execAndUpdate(() => {
-                                if (toolbarRef.current) toolbarRef.current.style.display = 'none';
-                                editorInstance.current?.toggleHeading(level);
-                            })}
-                            style={{ color: activeStates.heading === `h${level}` ? 'blue' : 'white' }}>
-                        H{level}
-                    </button>
-                ))}
-
-                <div className="separator" style={{ borderLeft: '1px solid #555', height: 20 }} />
-
-                <button onMouseDown={execAndUpdate(() => {
-                    if (toolbarRef.current) toolbarRef.current.style.display = 'none';
-                    editorInstance.current?.unorderedList();
-                })}
-                        style={{ color: activeStates.unorderedList ? 'blue' : 'white' }}>
-                    • Liste
+                <button
+                    onMouseDown={execAndUpdate(() => editorInstance.current?.toggleHeading(1))}
+                    style={{
+                        padding: '4px 8px',
+                        borderRadius: '4px',
+                        background: activeStates.heading === 'h1' ? '#555' : 'transparent',
+                        color: activeStates.heading === 'h1' ? '#fff' : '#ccc',
+                        cursor: 'pointer',
+                        border: 'none',
+                    }}
+                >
+                    Heading 1
                 </button>
-
-                <button onMouseDown={execAndUpdate(() => {
-                    const url = prompt("Görsel URL'sini girin:");
-                    if (url) editorInstance.current?.insertImage(url);
-                })}>
-                    📷 Görsel
+                <button
+                    onMouseDown={execAndUpdate(() => editorInstance.current?.toggleHeading(2))}
+                    style={{
+                        padding: '4px 8px',
+                        borderRadius: '4px',
+                        background: activeStates.heading === 'h2' ? '#555' : 'transparent',
+                        color: activeStates.heading === 'h2' ? '#fff' : '#ccc',
+                        cursor: 'pointer',
+                        border: 'none',
+                    }}
+                >
+                    Heading 2
+                </button>
+                <button
+                    onMouseDown={execAndUpdate(() => editorInstance.current?.toggleHeading(3))}
+                    style={{
+                        padding: '4px 8px',
+                        borderRadius: '4px',
+                        background: activeStates.heading === 'h3' ? '#555' : 'transparent',
+                        color: activeStates.heading === 'h3' ? '#fff' : '#ccc',
+                        cursor: 'pointer',
+                        border: 'none',
+                    }}
+                >
+                    Heading 3
+                </button>
+                <button
+                    onMouseDown={execAndUpdate(() => editorInstance.current?.unorderedList())}
+                    style={{
+                        padding: '4px 8px',
+                        borderRadius: '4px',
+                        background: activeStates.unorderedList ? '#555' : 'transparent',
+                        color: activeStates.unorderedList ? '#fff' : '#ccc',
+                        cursor: 'pointer',
+                        border: 'none',
+                    }}
+                >
+                    Liste
                 </button>
             </div>
 
             <div
                 ref={editorRef}
                 id="editor"
-                style={{ minHeight: 200, border: "1px solid gray", padding: 10, borderRadius: 8 }}
+                style={{minHeight: 200, border: "1px solid gray", padding: 10, borderRadius: 8}}
                 contentEditable={true}
                 suppressContentEditableWarning={true}
             />
@@ -197,63 +350,17 @@ function App() {
                     gap: "6px",
                     fontFamily: "Inter, sans-serif",
                 }}>
-                    <div
-                        style={{
-                            cursor: 'pointer',
-                            background: activeStates.bold ? '#ddd' : 'transparent',
-                        }}
-                        onMouseDown={execAndUpdate(() => editorInstance.current?.bold(), true)}
-                    >
-                        🔠 Bold
-                    </div>
-
-                    <div
-                        style={{
-                            cursor: 'pointer',
-                            background: activeStates.italic ? '#ddd' : 'transparent',
-                        }}
-                        onMouseDown={execAndUpdate(() => editorInstance.current?.italic(), true)}
-                    >
-                        𝑰 Italic
-                    </div>
-
-                    <div
-                        style={{
-                            cursor: 'pointer',
-                            background: activeStates.underline ? '#ddd' : 'transparent',
-                        }}
-                        onMouseDown={execAndUpdate(() => editorInstance.current?.underline(), true)}
-                    >
-                        U Underline
-                    </div>
-
-                    <hr />
-
-                    {[1, 2, 3].map(level => (
-                        <div
-                            key={level}
-                            style={{
-                                cursor: 'pointer',
-                                background: activeStates.heading === `h${level}` ? '#ddd' : 'transparent',
-                            }}
-                            onMouseDown={execAndUpdate(() => editorInstance.current?.toggleHeading(level), true)}
-                        >
-                            📌 Heading {level}
-                        </div>
-                    ))}
-
-                    <hr />
-
-                    <div style={{ cursor: 'pointer' }}
-                         onMouseDown={execAndUpdate(() => editorInstance.current?.unorderedList(), true)}>
-                        📋 Liste
-                    </div>
-                    <div style={{ cursor: 'pointer' }} onMouseDown={execAndUpdate(() => {
-                        const url = prompt("Görsel URL'sini girin:");
-                        if (url) editorInstance.current?.insertImage(url);
-                    })}>
-                        🖼️ Görsel Ekle
-                    </div>
+                    {slashMenuItems
+                        .filter(item => item.label.toLowerCase().startsWith(slashFilter.toLowerCase()))
+                        .map(item => (
+                            <div
+                                key={item.label}
+                                style={{ cursor: 'pointer' }}
+                                onMouseDown={execAndUpdate(item.action, true)}
+                            >
+                                {item.label}
+                            </div>
+                        ))}
                 </div>
             )}
         </div>
