@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a1177e31-99e1-4380-9d02-766f3209139e" name="Changes" comment="feat: enhance slash command functionality and add text formatting options">
+      <change afterPath="$PROJECT_DIR$/src/components/EditorComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/types.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/reever-editor.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/src/editor.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/src/editor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/src/App.test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/src/App.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/src/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/src/react-app-env.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/src/reportWebVitals.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/src/setupTests.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/editor.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="tsconfig.json" />
+        <option value="package.json" />
+        <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;tansuasici&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ReeverApp/Reever.Editor.git&quot;,
+    &quot;accountId&quot;: &quot;31183345-56d5-4390-b493-a2709ccf3022&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2uPb9sdFlNk9jLpmpOO0xH4znxh" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/tansuasici/Projeler/Reever/editor/Reever.Editor/reever-editor/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.26053.12" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a1177e31-99e1-4380-9d02-766f3209139e" name="Changes" comment="" />
+      <created>1742153008526</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742153008526</updated>
+      <workItem from="1742153009575" duration="17630000" />
+      <workItem from="1742201749138" duration="10477000" />
+      <workItem from="1742214716717" duration="1084000" />
+      <workItem from="1742459773633" duration="4660000" />
+      <workItem from="1742503530801" duration="6000" />
+      <workItem from="1742560333911" duration="32630000" />
+    </task>
+    <task id="LOCAL-00001" summary="initialize reever-editor with basic functionality and configuration files">
+      <option name="closed" value="true" />
+      <created>1742174510855</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742174510855</updated>
+    </task>
+    <task id="LOCAL-00002" summary="refactor: clean up code formatting and improve slash command handling">
+      <option name="closed" value="true" />
+      <created>1742210118138</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1742210118138</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: enhance slash command functionality and add text formatting options">
+      <option name="closed" value="true" />
+      <created>1742222039326</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742222039329</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initialize reever-editor with basic functionality and configuration files" />
+    <MESSAGE value="refactor: clean up code formatting and improve slash command handling" />
+    <MESSAGE value="feat: enhance slash command functionality and add text formatting options" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: enhance slash command functionality and add text formatting options" />
+  </component>
+</project>
