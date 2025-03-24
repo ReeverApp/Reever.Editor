@@ -4,43 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1177e31-99e1-4380-9d02-766f3209139e" name="Changes" comment="feat: enhance slash command functionality and add text formatting options">
-      <change afterPath="$PROJECT_DIR$/src/components/EditorComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/types/types.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/reever-editor.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/src/editor.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/src/editor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/public/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/public/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/src/App.test.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/src/App.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/src/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/src/react-app-env.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/src/reportWebVitals.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/src/setupTests.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/editor.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" />
+    <list default="true" id="a1177e31-99e1-4380-9d02-766f3209139e" name="Changes" comment="feat: update package.json and tsconfig.json for improved dependencies and TypeScript configuration">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/EditorComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditorComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +80,8 @@
       <workItem from="1742214716717" duration="1084000" />
       <workItem from="1742459773633" duration="4660000" />
       <workItem from="1742503530801" duration="6000" />
-      <workItem from="1742560333911" duration="32630000" />
+      <workItem from="1742560333911" duration="32703000" />
+      <workItem from="1742821367920" duration="4591000" />
     </task>
     <task id="LOCAL-00001" summary="initialize reever-editor with basic functionality and configuration files">
       <option name="closed" value="true" />
@@ -140,7 +107,23 @@
       <option name="project" value="LOCAL" />
       <updated>1742222039329</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: add EditorComponent with rich text editing capabilities and various inline tools">
+      <option name="closed" value="true" />
+      <created>1742673981534</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742673981534</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: update package.json and tsconfig.json for improved dependencies and TypeScript configuration">
+      <option name="closed" value="true" />
+      <created>1742674015654</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742674015654</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,6 +133,8 @@
     <MESSAGE value="initialize reever-editor with basic functionality and configuration files" />
     <MESSAGE value="refactor: clean up code formatting and improve slash command handling" />
     <MESSAGE value="feat: enhance slash command functionality and add text formatting options" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: enhance slash command functionality and add text formatting options" />
+    <MESSAGE value="feat: add EditorComponent with rich text editing capabilities and various inline tools" />
+    <MESSAGE value="feat: update package.json and tsconfig.json for improved dependencies and TypeScript configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: update package.json and tsconfig.json for improved dependencies and TypeScript configuration" />
   </component>
 </project>

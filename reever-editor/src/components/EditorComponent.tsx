@@ -26,7 +26,7 @@ const EditorComponent: React.FC = () => {
                     paragraph: {
                         class: Paragraph as unknown as ToolConstructable,
                         inlineToolbar: true,
-                        toolbox:{
+                        toolbox: {
                             icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-type"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg>',
                             title: 'Text'
                         }
@@ -34,7 +34,7 @@ const EditorComponent: React.FC = () => {
                     link: {
                         class: createGenericInlineTool({
                             sanitize: {
-                                a: { href: true, target: true, rel: true }
+                                a: {href: true, target: true, rel: true}
                             },
                             shortcut: 'CMD+K',
                             tagName: 'A',
@@ -53,14 +53,14 @@ const EditorComponent: React.FC = () => {
                         }),
                     },
                     italic: {
-                      class: createGenericInlineTool({
-                        sanitize: {
-                          i: {}
-                        },
-                        shortcut: 'CMD+I',
-                        tagName: 'I',
-                        toolboxIcon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-italic"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>',
-                      }),
+                        class: createGenericInlineTool({
+                            sanitize: {
+                                i: {}
+                            },
+                            shortcut: 'CMD+I',
+                            tagName: 'I',
+                            toolboxIcon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-italic"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>',
+                        }),
                     },
                     underline: {
                         class: createGenericInlineTool({
@@ -73,14 +73,14 @@ const EditorComponent: React.FC = () => {
                         }),
                     },
                     strikethrough: {
-                      class: createGenericInlineTool({
-                        sanitize: {
-                          s: {}
-                        },
-                        shortcut: 'CMD+SHIFT+S',
-                        tagName: 'S',
-                        toolboxIcon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-strikethrough"><path d="M16 4H9a3 3 0 0 0-2.83 4"/><path d="M14 12a4 4 0 0 1 0 8H6"/><line x1="4" x2="20" y1="12" y2="12"/></svg>',
-                      }),
+                        class: createGenericInlineTool({
+                            sanitize: {
+                                s: {}
+                            },
+                            shortcut: 'CMD+SHIFT+S',
+                            tagName: 'S',
+                            toolboxIcon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-strikethrough"><path d="M16 4H9a3 3 0 0 0-2.83 4"/><path d="M14 12a4 4 0 0 1 0 8H6"/><line x1="4" x2="20" y1="12" y2="12"/></svg>',
+                        }),
                     },
                     header: {
                         class: Header as unknown as ToolConstructable,
