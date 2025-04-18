@@ -4,9 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1177e31-99e1-4380-9d02-766f3209139e" name="Changes" comment="feat: update package.json and tsconfig.json for improved dependencies and TypeScript configuration">
+    <list default="true" id="a1177e31-99e1-4380-9d02-766f3209139e" name="Changes" comment="feat: add CategoryHeader and HorizontalRule components with styling updates">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/reever-editor.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/CategoryHeader.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/HorizontalRule.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/editor.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/EditorComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditorComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +26,9 @@
       <list>
         <option value="tsconfig.json" />
         <option value="package.json" />
-        <option value="TypeScript JSX File" />
+        <option value="CSS File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -46,24 +55,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/tansuasici/Projeler/Reever/editor/Reever.Editor/reever-editor/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Users/tansuasici/Projeler/Reever/editor/Reever.Editor/reever-editor/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.26053.12" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-WS-251.23774.424" />
       </set>
     </attachedChunks>
   </component>
@@ -81,7 +91,9 @@
       <workItem from="1742459773633" duration="4660000" />
       <workItem from="1742503530801" duration="6000" />
       <workItem from="1742560333911" duration="32703000" />
-      <workItem from="1742821367920" duration="4591000" />
+      <workItem from="1742821367920" duration="4813000" />
+      <workItem from="1744841200501" duration="600000" />
+      <workItem from="1744896058191" duration="12795000" />
     </task>
     <task id="LOCAL-00001" summary="initialize reever-editor with basic functionality and configuration files">
       <option name="closed" value="true" />
@@ -123,7 +135,23 @@
       <option name="project" value="LOCAL" />
       <updated>1742674015654</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="refactor: improve code formatting and consistency in EditorComponent">
+      <option name="closed" value="true" />
+      <created>1742829327651</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742829327651</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: add VCS and inspection configuration files for project setup">
+      <option name="closed" value="true" />
+      <created>1742829336160</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742829336160</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,6 +163,9 @@
     <MESSAGE value="feat: enhance slash command functionality and add text formatting options" />
     <MESSAGE value="feat: add EditorComponent with rich text editing capabilities and various inline tools" />
     <MESSAGE value="feat: update package.json and tsconfig.json for improved dependencies and TypeScript configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: update package.json and tsconfig.json for improved dependencies and TypeScript configuration" />
+    <MESSAGE value="refactor: improve code formatting and consistency in EditorComponent" />
+    <MESSAGE value="feat: add VCS and inspection configuration files for project setup" />
+    <MESSAGE value="feat: add CategoryHeader and HorizontalRule components with styling updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add CategoryHeader and HorizontalRule components with styling updates" />
   </component>
 </project>

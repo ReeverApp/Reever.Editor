@@ -12,23 +12,5 @@ code {
     monospace;
 }
 
-.itemChecked_null {
-    opacity: 1 !important;
-    width: 20px !important;
-    border: 1px solid #DDDFE6 !important;
-    border-radius: 4px !important;
-}
 
-.itemChecked_false {
-    opacity: 1 !important;
-    width: 20px !important;
-    border: 1px solid #DDDFE6 !important;
-    border-radius: 4px !important;
-}
 
-.itemChecked_true {
-    opacity: 1 !important;
-    width: 20px !important;
-    border-radius: 4px !important;
-    background-color: #1890FF !important;
-}
