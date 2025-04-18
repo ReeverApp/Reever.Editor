@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@alfa-code/editorjs-codeflask": "^1.0.9",
     "@calumk/editorjs-columns": "^0.3.2",
     "@calumk/editorjs-nested-checklist": "^1.1.0",
     "@editorjs/checklist": "^1.6.0",

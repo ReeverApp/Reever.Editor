@@ -14,6 +14,18 @@ import Quote from '@editorjs/quote';
 import CodeTool from '@editorjs/code';
 import CategoryHeader from "./CategoryHeader";
 
+function createCategoryHeader(text: string) {
+    return {
+        class: CategoryHeader,
+        inlineToolbar: false,
+        config: { text },
+        toolbox: {
+            title: text,
+            icon: '<svg width="0" height="0"></svg>',
+        },
+    };
+}
+
 const EditorComponent: React.FC = () => {
     const ejInstance = useRef<EditorJS | null>(null);
 
@@ -26,12 +38,7 @@ const EditorComponent: React.FC = () => {
                 },
                 placeholder: 'Enter your text here...',
                 tools: {
-                    categoryHeaderBasic: {
-                        class: CategoryHeader,
-                        inlineToolbar: false,
-                        config: { text: 'Basic Blocks' },
-                        toolbox: { title: 'Basic Blocks', icon: '<svg width="0" height="0"></svg>' },
-                    },
+                    categoryHeaderFormat: createCategoryHeader('Format'),
                     paragraph: {
                         class: Paragraph as unknown as ToolConstructable,
                         inlineToolbar: true,
@@ -73,12 +80,12 @@ const EditorComponent: React.FC = () => {
                         toolbox: [
                             {
                                 icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list"><path d="M3 12h.01"/><path d="M3 18h.01"/><path d="M3 6h.01"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M8 6h13"/></svg>',
-                                title: 'Unordered list',
+                                title: 'Bulleted list',
                                 data: {style: 'unordered'}
                             },
                             {
                                 icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-ordered"><path d="M10 12h11"/><path d="M10 18h11"/><path d="M10 6h11"/><path d="M4 10h2"/><path d="M4 6h1v4"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>',
-                                title: 'Ordered list',
+                                title: 'Numbered list',
                                 data: {style: 'ordered'}
                             }
                         ]
@@ -92,6 +99,23 @@ const EditorComponent: React.FC = () => {
                             data: {style: 'none'}
                         },
                     },
+                    blockquote: {
+                        class: Quote,
+                        inlineToolbar: true,
+                        toolbox: {
+                            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-quote-icon lucide-quote"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>',
+                            title: 'Blockquote'
+                        }
+                    },
+                    code: {
+                        class: CodeTool,
+                        inlineToolbar: true,
+                        toolbox: {
+                            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-2"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>',
+                            title: 'Code Block'
+                        }
+                    },
+                    categoryHeaderInsert: createCategoryHeader('Insert'),
                     table: {
                         class: Table as unknown as ToolConstructable,
                         inlineToolbar: true,
@@ -125,22 +149,6 @@ const EditorComponent: React.FC = () => {
                             title: 'Delimiter'
                         }
                     },
-                    blockquote: {
-                        class: Quote,
-                        inlineToolbar: true,
-                        toolbox: {
-                            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-quote-icon lucide-quote"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>',
-                            title: 'Blockquote'
-                        }
-                    },
-                    code: {
-                        class: CodeTool,
-                        inlineToolbar: true,
-                        toolbox: {
-                            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-2"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>',
-                            title: 'Code Block'
-                        }
-                    },
                     link: {
                         class: createGenericInlineTool({
                             sanitize: {
@@ -159,7 +167,7 @@ const EditorComponent: React.FC = () => {
                             shortcut: 'CMD+B',
                             tagName: 'STRONG',
                             toolboxIcon:
-                                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bold"><path d="M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8"/></svg>',
+                                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bold-icon lucide-bold"><path d="M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8"/></svg>',
                         }),
                     },
                     italic: {
@@ -192,7 +200,26 @@ const EditorComponent: React.FC = () => {
                             toolboxIcon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-strikethrough"><path d="M16 4H9a3 3 0 0 0-2.83 4"/><path d="M14 12a4 4 0 0 1 0 8H6"/><line x1="4" x2="20" y1="12" y2="12"/></svg>',
                         }),
                     },
-
+                    subscriptTool:{
+                        class:createGenericInlineTool({
+                            sanitize:{
+                                sub:{}
+                            },
+                            shortcut:'CMD+SHIFT+I',
+                            tagName:'SUB',
+                            toolboxIcon:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-subscript-icon lucide-subscript"><path d="m4 5 8 8"/><path d="m12 5-8 8"/><path d="M20 19h-4c0-1.5.44-2 1.5-2.5S20 15.33 20 14c0-.47-.17-.93-.48-1.29a2.11 2.11 0 0 0-2.62-.44c-.42.24-.74.62-.9 1.07"/></svg>'
+                        })
+                    },
+                    superscriptTool:{
+                        class:createGenericInlineTool({
+                            sanitize:{
+                                sup:{}
+                            },
+                            shortcut:'CMD+SHIFT+.',
+                            tagName:'SUP',
+                            toolboxIcon:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-superscript-icon lucide-superscript"><path d="m4 19 8-8"/><path d="m12 19-8-8"/><path d="M20 12h-4c0-1.5.442-2 1.5-2.5S20 8.334 20 7.002c0-.472-.17-.93-.484-1.29a2.105 2.105 0 0 0-2.617-.436c-.42.239-.738.614-.899 1.06"/></svg>'
+                        })
+                    },
                 },
             });
         }

@@ -1,35 +1,27 @@
-interface CategoryHeaderData {
-    text?: string;
-}
-
 interface CategoryHeaderConfig {
-    data?: CategoryHeaderData;
-    api?: any;
+    text?: string;
 }
 
 export default class CategoryHeader {
     wrapper: HTMLElement;
-    data: CategoryHeaderData;
-    api: any;
+    text: string;
 
-    // Toolbox statik fonksiyonunu tamamen boş bırakın
     static get toolbox() {
         return {
-            title: '',
+            title: '',  // Bu alan toolbox'ta boş kalmalı
             icon: '<svg width="0" height="0"></svg>',
         };
     }
 
-    constructor({ data, config, api }: CategoryHeaderConfig & { config?: { text?: string } }) {
-        this.api = api;
-        this.data = { text: config?.text || data?.text || '' };
+    constructor({ config }: { config?: CategoryHeaderConfig }) {
+        this.text = config?.text || 'Category';
         this.wrapper = document.createElement('div');
     }
 
     render() {
         this.wrapper.classList.add('ce-category-header');
         this.wrapper.contentEditable = 'false';
-        this.wrapper.textContent = this.data.text || '';
+        this.wrapper.textContent = this.text;
 
         return this.wrapper;
     }

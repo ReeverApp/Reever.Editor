@@ -1,4 +1,3 @@
-/* --- EditorJS Popover Items Styling --- */
 .itemChecked_null {
     opacity: 1 !important;
     width: 20px !important;
@@ -20,7 +19,6 @@
     background-color: #1890FF !important;
 }
 
-/* Default (inactive) state */
 .ce-popover-item,
 .ce-popover-item .ce-popover-item-label,
 .ce-popover-item-icon svg {
@@ -28,7 +26,6 @@
     stroke: #6B7280 !important;
 }
 
-/* Hover and active state */
 .ce-popover-item:hover,
 .ce-popover-item--active {
     color: #374151 !important; /* Tailwind gray-700 */
@@ -43,32 +40,45 @@
 }
 
 .ce-category-header {
-    color: #999;
-    font-size: 13px;
-    text-transform: uppercase;
-    margin: 16px 0 8px 8px;
-    pointer-events: none;
-    user-select: none;
-    font-weight: 600;
+    pointer-events: none !important;
+    cursor: default !important;
+    font-size: 10px !important; /* Adjust this value for smaller font */
+    text-transform: uppercase !important;
+    color: #9ca3af !important;
+    font-weight: 600 !important;
+    user-select: none !important; /* Prevent selection */
+    padding-left: 8px !important;
+    margin-top: 8px !important;
+    background-color: transparent !important;
 }
 
-.ce-popover-item[data-item-name="categoryHeaderBasic"] .ce-popover-item__title {
-    pointer-events: none !important; /* tıklanamaz */
-    cursor: default !important;      /* varsayılan cursor */
-    font-size: 11px !important;      /* küçük font */
-    text-transform: uppercase !important; /* büyük harf */
-    color: #9ca3af !important;       /* gri renk */
-    font-weight: 600 !important;     /* kalın font */
-    user-select: none !important;    /* seçilemez */
-    padding-left: 8px !important;    /* sol padding */
+.ce-popover-item[data-item-name^="categoryHeader"] {
+    pointer-events: none !important; /* Disable clicking */
+    user-select: none !important; /* Prevent selection */
+}
+
+.ce-popover-item[data-item-name^="categoryHeader"] .ce-popover-item__icon {
+    display: none !important; /* Hide icon */
+}
+
+.ce-popover-item[data-item-name^="categoryHeader"] .ce-popover-item__title {
+    font-size: 10px !important; /* Adjust this value for smaller font */
+    color: #9ca3af !important; /* Gray color */
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
     margin-top: 8px !important;
 }
 
-.ce-popover-item[data-item-name="categoryHeaderBasic"] .ce-popover-item__icon {
-    display: none !important; /* ikon gizli */
+.ce-popover-item-html button.ce-inline-tool,
+.ce-popover-item-html button.ce-inline-tool svg {
+    color: #6B7280 !important; /* Tailwind gray-500 */
+    stroke: #6B7280 !important;
 }
 
-.ce-popover-item[data-item-name="categoryHeaderBasic"] {
-    pointer-events: none !important; /* kategori başlığı tıklanamaz */
-    background-color: transparent !important; /* arkaplan transparan */
+.ce-popover-item-html button.ce-inline-tool:hover,
+.ce-popover-item-html button.ce-inline-tool--active,
+.ce-popover-item-html button.ce-inline-tool:hover svg,
+.ce-popover-item-html button.ce-inline-tool--active svg {
+    color: #374151 !important; /* Tailwind gray-700 */
+    stroke: #374151 !important;
 }
