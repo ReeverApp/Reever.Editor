@@ -1,0 +1,13 @@
+declare module "@editorjs/header";
+declare module "@editorjs/checklist";
+declare module "@calumk/editorjs-nested-checklist";
+declare module "editorjs-drag-drop";
+declare module 'editorjs-strikethrough';
+declare module "editorjs-inline-tool";
+declare module "@cychann/editorjs-quote";
+declare module "@editorjs/paragraph";
+declare module "@editorjs/list";
+declare module "@editorjs/table";
+declare module "@editorjs/image";
+declare module "@editorjs/delimiter";
+declare module "@editorjs/code";

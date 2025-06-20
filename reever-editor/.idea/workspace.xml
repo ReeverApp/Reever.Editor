@@ -4,12 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1177e31-99e1-4380-9d02-766f3209139e" name="Changes" comment="feat: update package.json and package-lock.json to remove text-variant-tune and add text-alignment-blocktune">
+    <list default="true" id="a1177e31-99e1-4380-9d02-766f3209139e" name="Changes" comment="feat: update package.json and package-lock.json for versioning, add dependencies, and enhance README.md">
+      <change afterPath="$PROJECT_DIR$/.npmignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/App.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/components/CategoryHeader.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/components/CategoryHeader.d.ts.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/components/CategoryHeader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/components/EditorComponent.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/components/EditorComponent.d.ts.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/components/EditorComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/components/HorizontalRule.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/components/HorizontalRule.d.ts.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/components/HorizontalRule.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/editor.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/index.d.ts.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsconfig.build.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/EditorComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditorComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/editor.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/editor.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/types.d.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,7 +110,7 @@
       <workItem from="1744841200501" duration="600000" />
       <workItem from="1744896058191" duration="17328000" />
       <workItem from="1744982455009" duration="9094000" />
-      <workItem from="1750341469846" duration="3300000" />
+      <workItem from="1750341469846" duration="4820000" />
     </task>
     <task id="LOCAL-00001" summary="initialize reever-editor with basic functionality and configuration files">
       <option name="closed" value="true" />
@@ -165,11 +184,24 @@
       <option name="project" value="LOCAL" />
       <updated>1744989370756</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="feat: add quote tool and update icon sizes in EditorComponent, update tsconfig.json and editor.css">
+      <option name="closed" value="true" />
+      <created>1750380888790</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1750380888790</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/types/types.d.ts" />
+      </list>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initialize reever-editor with basic functionality and configuration files" />
@@ -181,6 +213,8 @@
     <MESSAGE value="feat: add VCS and inspection configuration files for project setup" />
     <MESSAGE value="feat: add CategoryHeader and HorizontalRule components with styling updates" />
     <MESSAGE value="feat: refactor CategoryHeader component and update styling in editor.css" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: refactor CategoryHeader component and update styling in editor.css" />
+    <MESSAGE value="feat: add quote tool and update icon sizes in EditorComponent, update tsconfig.json and editor.css" />
+    <MESSAGE value="feat: update package.json and package-lock.json for versioning, add dependencies, and enhance README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: update package.json and package-lock.json for versioning, add dependencies, and enhance README.md" />
   </component>
 </project>

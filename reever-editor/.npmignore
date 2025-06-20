@@ -1,0 +1,63 @@
+# Development files
+src/
+public/
+docs/
+demo/
+
+# Config files
+tsconfig.json
+tsconfig.build.json
+.eslintrc*
+.prettierrc*
+
+# Test files
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+src/setupTests.ts
+src/reportWebVitals.ts
+
+# Build files (keep only dist)
+build/
+.next/
+
+# Development dependencies
+node_modules/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Misc
+*.tgz
+.cache/

@@ -1,0 +1,28 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "declarationMap": true,
+    "noEmit": false,
+    "emitDeclarationOnly": false,
+    "isolatedModules": false,
+    "skipLibCheck": true,
+    "noImplicitAny": false
+  },
+  "include": [
+    "src/index.ts",
+    "src/components/**/*"
+  ],
+  "exclude": [
+    "src/**/*.test.tsx",
+    "src/**/*.test.ts",
+    "src/**/*.stories.tsx",
+    "src/App.tsx",
+    "src/index.tsx",
+    "src/reportWebVitals.ts",
+    "src/setupTests.ts",
+    "node_modules",
+    "dist"
+  ]
+}
