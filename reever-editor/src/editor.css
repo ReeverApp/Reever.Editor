@@ -82,3 +82,7 @@
     color: #374151 !important; /* Tailwind gray-700 */
     stroke: #374151 !important;
 }
+
+.ce-inline-tool{
+    padding: revert !important;
+}

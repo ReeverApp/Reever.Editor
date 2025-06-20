@@ -6,6 +6,7 @@
     "@alfa-code/editorjs-codeflask": "^1.0.9",
     "@calumk/editorjs-columns": "^0.3.2",
     "@calumk/editorjs-nested-checklist": "^1.1.0",
+    "@cychann/editorjs-quote": "^1.0.4",
     "@editorjs/checklist": "^1.6.0",
     "@editorjs/code": "^2.9.3",
     "@editorjs/delimiter": "^1.4.2",

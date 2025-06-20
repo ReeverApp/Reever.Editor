@@ -21,10 +21,17 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src",
+    "src/**/*",
     "**/*.ts",
-    "**/*.tsx",
-    "global.d.ts",
+    "**/*.tsx"
   ],
-  "typeRoots": ["./node_modules/@types", "./types"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dist"
+  ],
+  "typeRoots": [
+    "./node_modules/@types",
+    "./types"
+  ]
 }
