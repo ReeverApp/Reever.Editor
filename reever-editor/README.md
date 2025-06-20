@@ -106,4 +106,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-If you encounter any issues or have questions, please [open an issue](https://github.com/your-username/reever-editor/issues) on GitHub.
+If you encounter any issues or have questions, please [open an issue](https://github.com/ReeverApp/Reever.Editor/issues) on GitHub.
